@@ -10,7 +10,7 @@ router.get("/", async (request, response) => {
     const result = await Review.find();
     response.send(result);
   } catch (err) {
-    response.send("Cannot get the Reviews");
+    response.send(err.message);
   }
 });
 
@@ -31,7 +31,7 @@ router.post("/", async (request, response) => {
     const result = await reviewObj.save();
     response.send(result);
   } catch (err) {
-    response.send("Error Occured while storing a review");
+    response.send(err.message);
   }
 });
 
