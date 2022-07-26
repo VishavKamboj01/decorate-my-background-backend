@@ -6,25 +6,33 @@ import jwtDecode from "jwt-decode";
 const router = express.Router();
 
 router.get("/", async (request, response) => {
-  const result = await Review.find();
-  response.send(result);
+  try {
+    const result = await Review.find();
+    response.send(result);
+  } catch (err) {
+    response.send("Cannot get the Reviews");
+  }
 });
 
 router.post("/", async (request, response) => {
   const review = request.body;
   const u = jwtDecode(review.jwt);
 
-  const user = await User.findById(u.id);
-  if (!user) return response.status(400).send("User not found");
+  try {
+    const user = await User.findById(u.id);
+    if (!user) return response.status(400).send("User not found");
 
-  const reviewObj = new Review({
-    userId: user._id,
-    userName: user.userName,
-    review: review.data,
-  });
+    const reviewObj = new Review({
+      userId: user._id,
+      userName: user.userName,
+      review: review.data,
+    });
 
-  const result = await reviewObj.save();
-  console.log(result);
+    const result = await reviewObj.save();
+    response.send(result);
+  } catch (err) {
+    response.send("Error Occured while storing a review");
+  }
 });
 
 export default router;

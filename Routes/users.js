@@ -6,8 +6,14 @@ const router = express.Router();
 
 //Getting the current user
 router.get("/me", authenticate, async (request, response) => {
-  const user = await User.findById(request.user.id);
-  response.send(user);
+  try {
+    const user = await User.findById(request.user.id);
+    if (!user)
+      response.status(400).send("User with the given ID was not found");
+    response.send(user);
+  } catch (err) {
+    response.status(500).send("Unexpected Error Occured");
+  }
 });
 
 //Creating a new User
