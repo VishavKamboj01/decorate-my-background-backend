@@ -1,3 +1,4 @@
 {
-  "jwtPrivateKey": "decorate_jwtPrivatekey"
+  "jwtPrivateKey": "decorate_jwtPrivatekey",
+  "db": "decorate_db"
 }

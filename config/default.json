@@ -1,3 +1,4 @@
 {
-  "jwtPrivateKey": ""
+  "jwtPrivateKey": "unsecureKey",
+  "db": "mongodb://localhost/decorate_my_background"
 }

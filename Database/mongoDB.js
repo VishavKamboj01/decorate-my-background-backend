@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
-
-const mongoDBUrl = "mongodb://localhost/decorate_my_background";
+import json from "../config/default.json" assert { type: "json" };
 
 function connectToDB() {
   mongoose
-    .connect(mongoDBUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(json.db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to DataBase..."))
     .catch((err) =>
       console.error("Could not connect to database... error ", err)
