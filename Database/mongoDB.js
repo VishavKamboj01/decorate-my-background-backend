@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 import config from "config";
+import winston from "winston";
 
 function connectToDB() {
+  const url = config.get("db");
   mongoose
-    .connect(config.get("db"))
-    .then(() => console.log("Connected to DataBase..."))
-    .catch((err) =>
-      console.error("Could not connect to database... error ", err)
-    );
+    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => winston.info("Connected to DataBase... " + url))
+    .catch((err) => winston.error("Could not connect to DB " + err));
 }
 
 export { connectToDB };

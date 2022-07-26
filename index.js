@@ -5,6 +5,8 @@ import compression from "compression";
 import users from "./Routes/users.js";
 import auth from "./Routes/auth.js";
 import review from "./Routes/reviews.js";
+import logger from "./logging.js";
+
 import { connectToDB } from "./Database/mongoDB.js";
 import cors from "cors";
 const app = express();
@@ -25,9 +27,11 @@ app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/reviews", review);
 
-connectToDB();
+logger();
 
 //Listening on a PORT
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on Port ${port}...`));
+
+connectToDB();
