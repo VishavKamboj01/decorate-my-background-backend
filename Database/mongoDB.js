@@ -7,7 +7,7 @@ function connectToDB() {
   mongoose
     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => winston.info("Connected to DataBase... " + url))
-    .catch((err) => winston.error("Could not connect to DB " + err));
+    .catch((err) => winston.error("Could not connect to DB " + err + url));
 }
 
 export { connectToDB };
