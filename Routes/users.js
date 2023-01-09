@@ -48,7 +48,7 @@ router.post("/", async (request, response) => {
   const token = user.getAuthToken();
   response
     .header("x-auth-token", token)
-    .header("access-control-expose-headers", "x-auth-token")
+    .header("access-control-expose-headers", "x-auth-token").header("access-control-allow-origin","http://decorate-my-background.onrender.com")
     .send(result);
 });
 
