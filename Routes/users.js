@@ -40,6 +40,7 @@ router.post("/", async (request, response) => {
     return;
   }
 
+
   //Hashing the password
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
@@ -48,7 +49,7 @@ router.post("/", async (request, response) => {
   const token = user.getAuthToken();
   response
     .header("x-auth-token", token)
-    .header("access-control-expose-headers", "x-auth-token").header("Access-Control-Allow-Origin","http://decorate-my-background.onrender.com")
+    .header("access-control-expose-headers", "x-auth-token")
     .send(result);
 });
 
